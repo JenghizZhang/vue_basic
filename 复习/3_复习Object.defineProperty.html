@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let person = {}
+        // //set和get中的this都是当前对象
+        // Object.defineProperty(person,'name',{
+        //     set(value) { //当修改person.name时，set被调用，set会收到修改后的值
+        //         console.log('set被调用了', value)
+        //         this.name = value //会形成递归一直调用，是错的
+        //     },
+        //     get(){ //当读取person.name时，get被调用，return的是处理后的新值
+        //         console.log('get被调用了')
+        //         return '张三'
+        //     }
+        // })
+
+        // 模拟数据代理
+        let _data = { msg: 'atguigu' }
+        let vm = {}
+        
+        Object.defineProperty(vm,'msg',{
+            set(value) {
+                _data.msg=value                    
+            },
+            get(){
+                return _data.msg
+            }
+        })
+    </script>
+</body>
+</html>
