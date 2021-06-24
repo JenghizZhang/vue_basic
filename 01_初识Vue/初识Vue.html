@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>初识Vue</title>
+        <!-- 引入vue全局就多了一个Vue -->
+        <script src="../js/vue.js"></script>
+    </head>
+
+    <body>
+        <!-- 准备好一个容器 -->
+        <div id="root">
+            <h1>hello，{{school.name.toUpperCase()}}</h1>
+            <h1>学校坐落在{{school.address}}</h1>
+            <h1>我学的是{{school.subject()}}</h1>
+            <hr />
+            <h1>{{school.name,school.address}}</h1>
+
+        </div>
+
+        <script>
+            // 创建一个Vue的示例对象，并传入配置对象
+            // 可以不用v来接实例
+            const v = new Vue({
+                el: '#root', // el用于指定当前Vue实例为哪个容器服务，值是选择器字符串，选择器的写法类似于jQuery
+                data: { //data是存储数据的地方，为root容器提供数据，值为一个对象，相当于React中的state
+                    school: {
+                        name:'atguigu',
+                        address:'宏富科技园',
+                        subject: ()=>'qianduan'
+                    }
+                }, 
+            })
+        </script>
+    </body>
+</html>
