@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>欢迎来到{{school}}</h2>
+        <!-- 绑定事件——标准方式 -->
+        <button v-on:click="show1">点我打印信息1（v-on:click）</button>
+        <br>
+        <!-- 绑定事件——简写方式方式 -->
+        <button @click="show1">点我打印信息1（@click）</button>
+        <br>
+
+        <!-- 绑定事件——传递参数 -->
+        <button @click="show2(666,$event,school)">点我打印信息2（传递参数）</button>
+        <br>
+
+        <!-- 绑定事件——阻止默认行为, prevent叫做事件修饰符 -->
+        <a href="http:www.baidu.com" @click.prevent="show3">点我提示信息3</a>
+        <br>
+
+        <!-- 绑定事件——阻止冒泡，stop叫做事件修饰符 -->
+        <div @click="show4">
+            <a href="http:www.baidu.com" @click.stop.prevent="show4">点我提示信息4（阻止冒泡）</a>
+        </div>
+        <br>
+
+        <!-- 绑定事件——键盘事件 enter,esc -->
+        <input @keyup.enter="show5" type="text" placeholder="按下回车提示数据">
+        <input @keyup.37="show5" type="text" placeholder="按下左箭头提示数据">
+    </div>
+
+    <script>
+        new Vue({
+            el:'#root',
+            data: {
+                school:'尚硅谷',
+            },
+            methods: { //用于配置方法
+                show1(event) {
+                    console.log('我是信息1',event.target.innerText)
+                },
+                show2(number,event,school){
+                    console.log('信息2~~~'+number,event,school)
+                },
+                show3(event) {
+                    // event.preventDefault(); //靠程序员手动阻止默认行为
+                    console.log('信息3',event)
+                },
+                show4(event){
+                    // event.stopPropagation(); //靠程序员手动阻止冒泡
+                    console.log('信息4')
+                },
+                show5(event){
+                    // if (event.keyCode !== 13) return //靠程序员自己判断按键
+                        console.log(event.target.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
