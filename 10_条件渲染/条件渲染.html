@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>条件渲染</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{ishot?'炎热':'寒冷'}}</h2>
+        <!-- 里面表达式直接就是data里面的值  -->
+        <button @click='ishot=!ishot'>切换天气</button> 
+
+        <!-- ---------------------------------------------------- -->
+
+        <!-- 使用v-show做条件渲染，会设置为display：none -->
+
+        <!-- 只有天气炎热才会展示下面的div -->
+        <div v-show='ishot'>
+            <h1>热！！！！！！</h1>
+            <h2>心静自然凉</h2>
+        </div>
+
+        <!-- 只有天气凉爽才会展示下面的div -->
+        <div v-show='!ishot'>
+            <h1>冷！！！！！！</h1>
+            <h2>干大事者怎么能不穿秋裤</h2>
+        </div>
+
+        <!-- ---------------------------------------------------- -->
+
+        <!-- 使用v-if v-else-if做条件渲染，节点直接删掉 -->
+
+        <!-- 只有天气炎热才会展示下面的div -->
+        <div v-if='ishot'>
+            <h1>热！！！！！！</h1>
+            <h2>心静自然凉</h2>
+        </div>
+        
+        <!-- 只有天气凉爽才会展示下面的div -->
+        <div v-else>
+            <h1>冷！！！！！！</h1>
+            <h2>干大事者怎么能不穿秋裤</h2>
+        </div>
+
+    </div>
+    <script>
+        new Vue({
+            el:'#root',
+            data:{
+                ishot:true,
+            },
+            methods:{
+                // changeWeather(){
+                //     this.ishot=!this.ishot
+                // }
+            }
+        })
+    </script>
+</body>
+</html>

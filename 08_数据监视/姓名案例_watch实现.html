@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据监视 watch实现</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        姓：<input v-model='firstName' type="text"><br><br>
+        名：<input v-model='lastName' type="text"><br><br>
+        <span>全名：{{fullName}}</span><br><br>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:'#root',
+            data(){
+                return {
+                    firstName: '张',
+                    lastName: '三',
+                    fullName: '',
+                }
+            },
+            watch:{
+                /* 
+                    1. watch中firstName是函数，在data中firstName被改变的时候调用
+                    2. watch中的firstName的this是谁——vm
+                */
+                //精简写法
+                /* firstName(newValue, oldValue) { //监测姓
+                    // console.log('firstName被修改了', newValue, oldValue)
+                    this.fullName = newValue + '-' + this.lastName
+                }, */
+
+                //完整写法
+                /* firstName: {
+                    handler(newValue, oldValue) {
+                        this.fullName = newValue + '-' + this.lastName
+                    },
+                    immediate: true, //若为true，则handler在初始化时就会调用一次，以后就看firstName的改变
+                }, */
+
+                lastName: {
+                    handler(newValue, oldValue){
+                        this.fullName = this.firstName + '-' + newValue
+                    }                    
+                },
+            }
+        })
+
+        // $watch
+        vm.$watch('firstName', {
+            handler(newValue, oldValue) {
+                this.fullName = newValue + '-' + this.lastName
+            },
+            immediate: true, //若为true，则handler在初始化时就会调用一次，以后就看firstName的改变
+        })
+
+    </script>
+</body>
+</html>

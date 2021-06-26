@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+    <style>
+        .atguigu {
+            border: 3px solid black;
+        }
+        .classA {
+            background-color: skyblue;
+        }
+        .classB {
+            color: red
+        }
+        .classC{
+            text-shadow: 2px 2px 3px yellow  ;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- class的字符串写法，适用于：类名不确定要动态获取 -->
+        <h2 class="atguigu" :class="myStyle">{{title}}过年好</h2>
+        <!-- class的对象写法，适用于：类名确定但不确定用不用 -->
+        <h2 class="atguigu" :class="{classB:hasB,'classC':hasC}">{{title}}过年好</h2>
+        <!-- class的三元表达式写法，适用于：类名确定但不确定用不用 -->
+        <h2 class="atguigu" :class="hasB? 'classB' : null">{{title}}过年好</h2>
+        <!-- class的数组写法，适用于：同时应用多个class -->
+        <h2 class="atguigu" :class="[myStyle,'classB','classC']">{{title}}过年好</h2>
+
+        <!-- 绑定style 不写{}会把里面所有东西当作变量-->
+        <h2 class="atguigu" :class="[myStyle,'classB','classC']" :style="{fontSize: size+'px'}">{{title}}过年好</h2>
+    </div>
+    <script>
+        new Vue({
+            el:'#root',
+            data(){
+                return {
+                    title: '同学们',
+                    myStyle: 'classA',
+                    hasB: true, //标识是否使用classB样式
+                    hasC: true, //标识是否使用classC样式
+                    size: 40,
+                }
+            }
+        })
+    </script>
+</body>
+</html>
