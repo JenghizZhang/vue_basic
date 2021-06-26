@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收集表单数据</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 
+        一、input type:
+            1. text，则v-model收集的是value值
+            2. radio，则v-model收集的是value值
+            3. checkbox
+                a. 如果不配value属性v-model初始值不是[]数组，默认为checked(bool值)的值
+                b. 如果配置value属性但v-model初始值不是[]数组，依然为checked(bool值)的值
+                c. 如果配置value属性且v-model初始值为[]数组，为勾选了的项组成的数组
+        二、select option，只需要给select配置v-model，值为所选的option
+        三、textarea，v-model手机的是value值
+        四、提交表单信息：一般都将信息放在data中的一个对象中
+     -->
+    <div id="root">
+        <form @submit.prevent="submit">
+            账号：<input type="text" v-model="userInfo.account"> 
+            <br><br>
+            密码：<input type="password" v-model="userInfo.password"> 
+            <br><br>
+            性别：男<input type="radio" name='sex' value='male' v-model="userInfo.sex">
+                  女<input type="radio" name='sex' value='female' v-model="userInfo.sex">
+            <br><br>
+            爱好：抽烟<input type="checkbox" value='smoke' v-model="userInfo.hobby">
+                  喝酒<input type="checkbox" value='drink' v-model="userInfo.hobby">
+                  开车<input type="checkbox" value='drive' v-model="userInfo.hobby">
+            <br><br>
+            所属校区：
+            <select v-model='userInfo.city'>
+                <option value="">请选择校区</option>
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="shenzhen">深圳</option>
+                <option value="wuhan">武汉</option>
+            </select>
+            <br><br>
+            其他信息：<textarea cols="30" rows="10" v-model='userInfo.info'></textarea>
+            <br><br>
+            <input type="checkbox" v-model='userInfo.agree'>阅读并接收<a href="http://www.baidu.com">《用户协议》</a>
+            <br><br>
+            <button>提交</button>
+        </form>
+    </div>
+
+    <script>
+        let a
+        new Vue({
+            el:'#root',
+            data:{
+                userInfo: {
+                    account: '',
+                    password: '',
+                    sex: '',
+                    hobby: [],
+                    city: '',
+                    info: '',
+                    agree: false,
+                }
+            },
+            methods:{
+                submit(event){
+                    console.log(this.userInfo)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

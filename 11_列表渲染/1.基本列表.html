@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基本列表</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+
+        <!-- 使用v-for遍历数组，先value后index -->
+        <ul>
+            <li v-for='(p,index) in persons' :key='p.id'>
+                {{p.name}}--{{p.sex}}--{{p.age}}岁
+            </li>
+        </ul>
+
+        <!-- 使用v-for遍历对象，先value后key -->
+        <ul>
+            <li v-for="(value,key) in car" :key='key'>{{key}} : {{value}}</li>
+        </ul>
+
+        <!-- 使用v-for遍历字符串，先字符后索引 -->
+        <ul>
+            <li v-for="(letter,index) in str" :key='index'>{{index}} : {{letter}}</li>
+        </ul>
+
+        <!-- 使用v-for遍历字符串，先num后索引 -->
+        <ul>
+            <li v-for="(n,index) in num" :key='index'>{{index}} : {{n}}</li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el:'#root',
+            data(){
+                return {
+                    persons: [
+                        { id: '001', name: '老刘', sex: '男', age: '18' },
+                        { id: '002', name: '老李', sex: '女', age: '19' },
+                        { id: '003', name: '老王', sex: '男', age: '20' },
+                        { id: '004', name: '老张', sex: '女', age: '21' },
+                    ],
+                    car: {
+                        name: '奔驰c63',
+                        price: '60w',
+                        color: 'black',
+                    },
+                    str: 'abcde',
+                    num: 12,
+                }
+            },
+        })
+    </script>
+</body>
+</html>

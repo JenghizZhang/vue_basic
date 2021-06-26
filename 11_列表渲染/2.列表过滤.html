@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+
+        <input v-model='input' type="text" placeholder="请输入姓名">
+        <ul>
+            <li v-for='(p,index) in formatePersons' :key='p.id'>
+                {{p.name}}--{{p.sex}}--{{p.age}}岁
+            </li>
+        </ul>
+
+    </div>
+    <script>
+        new Vue({
+            el:'#root',
+            data(){
+                return {
+                    persons: [
+                        { id: '001', name: '马冬梅', sex: '女', age: '18' },
+                        { id: '002', name: '周冬雨', sex: '女', age: '19' },
+                        { id: '003', name: '周杰伦', sex: '男', age: '20' },
+                        { id: '004', name: '温兆伦', sex: '男', age: '21' },
+                    ],
+                    input:''
+                }
+            },
+
+            //在watch中修改原数据，会导致原数据的丢失
+            /* watch:{
+                input(newValue,oldValue){
+                    const arr = this.persons.filter(p => p.name.indexOf(newValue) !== -1)
+                    console.log(arr)
+                    this.persons=arr
+                }
+            }, */
+
+            //想要对数据进行加工后再展示，且不破坏源数据，最好用computed
+            computed:{
+                formatePersons(){
+                    const arr = this.persons.filter(p => p.name.indexOf(this.input) !== -1)
+                    return arr
+                }
+            }
+        })
+    </script>
+</body>
+</html>

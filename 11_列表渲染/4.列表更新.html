@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表更新</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <input v-model='input' type="text" placeholder="请输入姓名">
+        <button @click='sortType=1'>年龄升序</button>
+        <button @click='sortType=2'>年龄降序</button>
+        <button @click='sortType=0'>原来顺序显示</button>
+        <button @click='update'>更改马冬梅的信息</button>
+        <ul>
+            <li v-for='(p,index) in formatePersons' :key='p.id'>
+                {{p.name}}--{{p.sex}}--{{p.age}}岁
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el:'#root',
+            data(){
+                return {
+                    persons: [
+                        { id: '001', name: '马冬梅', sex: '女', age: '28' },
+                        { id: '002', name: '周冬雨', sex: '女', age: '19' },
+                        { id: '003', name: '周杰伦', sex: '男', age: '20' },
+                        { id: '004', name: '温兆伦', sex: '男', age: '21' },
+                    ],
+                    input:'',
+                    sortType: 0,//0表示原顺序，1表示升序，2表示降序
+                }
+            },
+            methods: {
+                update() {
+                    this.persons.splice(0, 1, { id: '123', name: '马夏竹', age: 12 })
+                }
+            },
+            //想要对数据进行加工后再展示，且不破坏源数据，最好用computed
+            computed:{
+                formatePersons(){
+                    const {input, sortType} = this
+                    let arr = this.persons.filter(p => p.name.indexOf(input) !== -1)
+                    if(sortType){
+                        arr.sort((pre, p) => {
+                            //如果需要排序
+                            if (sortType === 1) return pre.age - p.age
+                            else return p.age - pre.age
+                        })
+                    }
+                    return arr
+                }
+            },
+            
+        })
+    </script>
+</body>
+</html>
