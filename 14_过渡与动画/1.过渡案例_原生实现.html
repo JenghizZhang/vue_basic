@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过渡案例——原生实现</title>
+    <!-- <script src="../js/vue.js"></script> -->
+    <style>
+        .img {
+            width: 100px;
+            transition: 1s all linear;
+        }
+        
+        .come {
+            width: 100px;
+            opacity: 1;
+            transform: scale(1) rotate(0);
+        }
+
+        .leave {
+            opacity: 0;
+            width: 100px;
+            transform: scale(0.2) rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <button id="btn">切换</button> <br><br>
+        <img src="https:s3.ax1x.com/2020/12/13/reCaqg.jpg" alt="" class="img">
+    </div>
+    <script>
+        const btn = document.getElementById('btn')
+        const img = document.getElementsByClassName('img')[0]
+        let isShow = true
+        btn.addEventListener('click',()=>{
+            if(isShow){
+               img.className='img leave' 
+               isShow=!isShow
+            }else{
+               img.className='img come' 
+               isShow=!isShow
+            }
+        })
+    </script>
+</body>
+</html>

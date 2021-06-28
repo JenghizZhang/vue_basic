@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+    <script src="../js/vue.js"></script>
+    <script src="../js/moment.min.js"></script>
+</head>
+<body>
+    <div id="root"> 
+        <h2>显示格式化后的事件</h2>
+        <h3>{{time | dataFormater('YYY-MM-DD HH:mm:ss a')}}</h3>
+        <h3>{{time | dataFormater}}</h3>
+    </div>
+    <script>
+        //全局注册的过滤器
+        Vue.filter('dataFormater',function(value, str='YYYY-MM-DD'){
+            return moment(value).format(str)
+        })
+
+        new Vue({
+            el:'#root',
+            data:{
+                time:Date.now(),
+            },
+            // methods:{
+            //     fmtDate(str='YYYY-MM-DD'){
+            //         return moment(this.time).format(str);
+            //     }
+            // },
+        })
+    </script>
+</body>
+</html>

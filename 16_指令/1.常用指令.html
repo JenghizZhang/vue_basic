@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常用指令</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <a :href="url" v-text='title'></a>
+        <div v-html='htmlStr'>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:'#root',
+            data:{
+                url:'http://www.baidu.com',
+                title:'百度一下你就知道',
+                htmlStr:'<h4>欢迎来到尚硅谷</h4>'
+            }
+        })
+    </script>
+</body>
+</html>

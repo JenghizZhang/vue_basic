@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分析生命周期</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2 id='h2'>当前页面求和为{{sum}}</h2>
+        <button @click='add' id="btn">点我+1</button>
+        <button @click='destroy' >点我destroy</button>
+    </div>
+    <script>
+        //修改Vue的全局配置
+        Vue.config.productionTip = false //关闭生产提示
+
+        new Vue({
+            el: '#root',
+            data: {
+                sum: 0,
+            },
+            methods:{
+                add(){
+                    this.sum += 1;
+                },
+                destroy() {
+                    this.$destroy()
+                },
+            },
+            //Vue实例初始化前
+            beforeCreate() {
+                console.log('vm----beforeCreate')
+                // console.log(this.add) //undefined
+                // console.log(this.sum) //undefined
+            },
+
+            //Vue实例初始化完毕
+            created(){
+                console.log('vm----created')
+                // console.log(this.add) //function
+                // console.log(this.sum) //0
+            },
+
+            //挂在前，Vue完成对虚拟DOM的创建，vue实例更新真实DOM之前
+            beforeMount() {
+                console.log('vm----beforeMount')
+                // const h2 = document.getElementById('h2')
+                // console.log(h2)
+                // const btn = document.getElementById('btn')
+                // btn.innerText='123'
+                // debugger
+            },
+
+            //挂载之后，vue实例更新完真实DOM了
+            mounted(){
+                console.log('vm----mounted')
+                // const btn = document.getElementById('btn')
+                // btn.innerText = '123'
+                // console.log(btn);
+            },
+
+            //Vue实例将要更新页面
+            beforeUpdate() {
+                console.log('vm----beforeUpdate')
+                // console.log(this.sum);
+                // debugger
+            },
+
+            //Vue实例已经更新页面
+            updated() {
+                console.log('vm----updated')
+                // console.log(this.sum);
+            },
+
+            //Vue实例销毁之前
+            beforeDestroy() {
+                console.log('vm----beforeDestroy')
+                // console.log(this);
+            },
+
+            //Vue实例销毁之前
+            destroyed() {
+                console.log('vm----destroyed')
+                console.log('我移除了所有数据监视，不会更新页面了');
+            },
+        })
+    </script>
+</body>
+</html>
